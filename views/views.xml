@@ -1,0 +1,95 @@
+<openerp>
+  <data>
+
+    <!-- declare a menu item and the action performed by it -->
+    <act_window id="action_open_reservations" name="Reservations" res_model="fa.reservation" view_mode="tree,form"/>
+    <act_window id="action_open_patients" name="Patients" res_model="fa.patient" view_mode="tree,form"/>
+    <act_window id="action_open_doctors" name="Doctors" res_model="fa.doctor" view_mode="tree,form"/>
+    <act_window id="action_open_medical_records" name="MedicalRecords" res_model="fa.medical_record" view_mode="tree,form"/>
+
+    <menuitem id="fusion_admin" name="Backend" sequence="0" action="action_open_reservations"/>
+
+    <menuitem name="Reservations" action="action_open_reservations" id="sub_menu_reservations" parent="fusion_admin"/>
+    <menuitem name="Patients" action="action_open_patients" id="sub_menu_patients" parent="fusion_admin"/>
+    <menuitem name="Doctors" action="action_open_doctors" id="sub_menu_doctors" parent="fusion_admin"/>
+    <menuitem name="MedicalRecords" action="action_open_medical_records" id="sub_menu_medical_records" parent="fusion_admin"/>
+
+    <record id="view_tree_reservations" model="ir.ui.view">
+      <field name="name">fa.reservations.lists</field>
+      <field name="model">fa.reservation</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="p_phone"/>
+          <field name="p_date"/>
+          <field name="p_location"/>
+          <field name="can_be_arranged"/>
+          <field name="aasm_state"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_tree_patients" model="ir.ui.view">
+      <field name="name">fa.patients.list</field>
+      <field name="model">fa.patient</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="age"/>
+          <field name="gender"/>
+          <field name="date_of_birth"/>
+          <field name="id_card_num"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_tree_doctors" model="ir.ui.view">
+      <field name="name">fa.doctors.list</field>
+      <field name="model">fa.doctor</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="gender"/>
+          <field name="good_at"/>
+          <field name="verified" readonly="1"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_form_doctor" model="ir.ui.view">
+      <field name="name">fa.doctors.show</field>
+      <field name="model">fa.doctor</field>
+      <field name="arch" type="xml">
+        <form>
+          <header>
+            <button name="verify" type="object" string="审核通过" class="oe_highlight"/>
+          </header>
+          <sheet>
+            <group name="group_top">
+              <group name="group_left">
+                <field name="name"/>
+              </group>
+              <group name="group_right">
+                <field name="gender"/>
+                <field name="good_at"/>
+                <field name="verified" readonly="1"/>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="view_tree_medical_records" model="ir.ui.view">
+      <field name="name">fa.medical_records.list</field>
+      <field name="model">fa.medical_record</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="onset_date"/>
+          <field name="chief_complaint"/>
+          <field name="created_at"/>
+        </tree>
+      </field>
+    </record>
+
+  </data>
+</openerp>
