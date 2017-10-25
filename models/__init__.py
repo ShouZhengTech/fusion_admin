@@ -10,3 +10,9 @@ from . import rating
 
 from . import history
 from . import hospital
+
+from . import examination_group
+from . import examination
+from . import reservation_examination
+
+from . import reservation_image
